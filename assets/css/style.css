@@ -1,0 +1,50 @@
+body {
+         background-color: #E5E5E5;
+      }
+
+      .font-weight-normal {
+         font-size: 1rem;
+      }
+
+      .pie {
+         border: 2px solid #000;
+         border-radius: 2rem;
+         height: 4rem;
+         margin: 4rem 0;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      }
+
+      .pie a {
+         text-decoration: none;
+         font-size: 2rem;
+         color: #000;
+      }
+
+      .git {
+         width: 5rem;
+      }
+
+      #estado{
+         font-weight: bold;
+      }
+
+      @media only screen and (max-width: 600px) {
+         .display-4 {
+            font-size: 2rem;
+            text-align: center;
+         }
+
+         .btn {
+            width: 100%;
+         }
+
+         .pie a {
+            font-size: 1.2rem;
+         }
+
+         .git {
+            display: none;
+         }
+      }

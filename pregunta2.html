@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="datosApp">
+
+<head>
+    <meta charset="utf-8">
+    <title>Importar datos</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Listado Angular</title>
+</head>
+
+<body>
+    <div class="container">
+        <div ng-controller="controladorDatos">
+            <a href="pregunta1.html">Link pregunta 1</a>
+            <h1 class="w-100 d-flex justify-content-center py-4">Lista estado Alumnos</h1>
+            <div class="w-100 d-flex justify-content-center py-4">
+                <label class="pr-4 font-weight-bolder">Buscar alumno: </label>
+                <input type="text" ng-model="buscarAlumno">
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">CODIGO</th>
+                        <th scope="col">NOMBRES</th>
+                        <th scope="col">APELLIDOS</th>
+                        <th scope="col">NOTA 1</th>
+                        <th scope="col">NOTA 2</th>
+                        <th scope="col">NOTA 3</th>
+                        <th scope="col">SUMATORIA</th>
+                        <th scope="col">PROMEDIO</th>
+                        <th scope="col">CONDICIÓN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="alumno in equipo.alumnos | filter:buscarAlumno">
+                        <td>{{alumno.codigo}}</td>
+                        <td>{{alumno.nombres}}</td>
+                        <td>{{alumno.apellidos}}</td>
+                        <td>{{alumno.nota1}}</td>
+                        <td>{{alumno.nota2}}</td>
+                        <td>{{alumno.nota3}}</td>
+                        <td>{{alumno.nota1+alumno.nota2+alumno.nota3}}</td>
+                        <td>{{(alumno.nota1+alumno.nota2+alumno.nota3)/3 | number:0}}</td>
+                        <td id="estado" ng-model="estados">
+                            {{((alumno.nota1+alumno.nota2+alumno.nota3)/3>10)?'APROBADO':'DESAPROBADO'}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+        var misDatos = angular.module('datosApp', []);
+        misDatos.controller('controladorDatos', function ($scope, $http) {
+            $scope.importar = function () {
+                $http.get('./assets/alumnos.json').then(function (datos) {
+                    $scope.equipo = datos.data;
+                });
+            }
+            $scope.importar();
+        });
+
+
+    </script>
+</body>
+
+</html>
